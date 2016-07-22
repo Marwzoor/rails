@@ -2,8 +2,10 @@ class User < ApplicationRecord
 	has_many :shouts
 	attr_accessor :password
 
-	EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i
-	validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
+	EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\z/i
+	USERNAME_REGEX = /\A[a-zA-Z0-9_-]+\z/i
+
+	validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }, :format => USERNAME_REGEX
 	validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
 	validates :password, :confirmation => true #password_confirmation attr
 	validates_length_of :password, :in => 6..20, :on => :create

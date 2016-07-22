@@ -25,7 +25,11 @@
 		<% @shouts.each do |shout| %>
 			<div class="shout-feed-post list-group-item">
 				<div>
+					<% if @current_user.id != shout.user.id %>
+					<%= link_to("@#{shout.user.username}", {:action => "show", :controller => "users", :username => shout.user.username}) %>
+					<% else %>
 					@<%= shout.user.username %>
+					<% end %>
 				</div>
 				<%= shout.message %>
 			</div>

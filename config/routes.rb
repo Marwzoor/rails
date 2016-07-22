@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get "feed", :to => "sessions#home"
   match "profile", :to => "sessions#profile", :via => [:get, :post]
   match "setting", :to => "sessions#setting", :via => [:get, :post]
+  match "/users/:username", :to => "users#show", :via => [:get]
   post "shouts/create", :to => "shouts#create"
 end
