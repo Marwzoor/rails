@@ -1,0 +1,22 @@
+.btn {
+    border-radius: 20px;
+    padding: 6px 20px;
+    transition: background-color .2s ease-in-out,
+    			color .2s ease-in-out,
+    			border-color .2s ease-in-out;
+
+    &.btn-default {
+
+    }
+
+    &.btn-primary {
+	    background-color: #5f9cff;
+	    border-color: #5f9cff;
+
+	    &:hover, &:focus {
+	    	background-color: #666;
+	    	border-color: #666;
+	    	color: #fff;
+	    }
+	}
+}
