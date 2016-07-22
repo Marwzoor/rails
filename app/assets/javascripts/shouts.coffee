@@ -6,10 +6,25 @@ jQuery(document).ready( ($) ->
 	  dataType: 'json'
 	})
 
+	String.prototype.replaceDataTags = (dataTags) ->
+
+		replacedString = this;
+
+		for k,v of dataTags
+			replacedString = replacedString.replace("%%" + k + "%%", v)
+
+		return replacedString
+
+	String.prototype.replaceDataTag = (dataTag, replacement) ->
+
+		return this.replace("%%" + dataTag + "%%", replacement)
+
+	newShoutTemplate = $("#new_shout_template").html();
+
 	# New Shout
 	$("#new_shout").on("ajax:success", (e, data, status, xhr) ->
 	  $(this).find("#shout_message").val("")
-	  $(".shout-feed").prepend("<div class='shout-feed-post list-group-item'><div>" + data['user']['username'] + "</div>" + data['message'] + "</div>")
+	  $(".shout-feed").prepend(newShoutTemplate.replaceDataTags({"username": data['user']['username'], "message": data['message'], "created_at": data['created_at']}))
 	  $(".shout-feed").effect("highlight")
 	).on("ajax:error", (e, data, status, xhr) ->
 	  $("#new_shout").render_form_errors('shout', data.responseJSON)
