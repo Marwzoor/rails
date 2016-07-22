@@ -7,8 +7,41 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<%= link_to("Shouter", root_path, {class: "navbar-brand"}) %>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<% if @current_user == nil %>
+		        <li>
+		        	<p class="navbar-btn">
+		        		<%= link_to("Sign up", {:controller => "users", :action => "new"}, {class: "btn btn-default"}) %>
+		        	</p>
+		        </li>
+		        <li>
+		        	<p class="navbar-btn">
+		        		<%= link_to("Log in", {:controller => "sessions", :action => "login"}, {class: "btn btn-primary"}) %>
+		        	</p>
+		        </li>
+		        <% else %>
+		        <li>
+		        	<p class="navbar-text">
+		        		Signed in as @<%= @current_user.username %>
+		        	</p>
+		        </li>
+		         <li>
+		        	<p class="navbar-btn">
+		        		<%= link_to("Log out", {:controller => "sessions", :action => "logout"}, {class: "btn btn-default"}) %>
+		        	</p>
+		        </li>
+		        <% end %>
+		    </ul>
+		</div>
+	</nav>
+  	<div class="container main-container">
+    	<%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="list-group">
+			<div class="list-group-item">
+				@<%= @current_user.username %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			    <h3 class="panel-title">Shout your thoughts</h3>
+			</div>
+			<div class="panel-body">
+			<%= form_tag(:controller => 'shouts', :action => 'create') do %>
+				<div class="form-group">
+					<%= text_area_tag(:message, nil, {class: "form-control", placeholder: "Enter message"}) %>
+				</div>
+				<%= hidden_field_tag(:redirect_to, request.original_url) %>
+				<%= submit_tag("Post shout", {class: "btn btn-primary"}) %>
+			<% end %>
+			</div>
+		</div>
+		<div class="shout-feed list-group">
+		<% @shouts.each do |shout| %>
+			<div class="shout-feed-post list-group-item">
+				<div>
+					@<%= shout.user.username %>
+				</div>
+				<%= shout.message %>
+			</div>
+		<% end %>
+		</div>
+	</div>
+</div>
