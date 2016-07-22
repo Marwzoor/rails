@@ -29,6 +29,11 @@ class SessionsController < ApplicationController
   end
 
   def profile
+    @user = @current_user
+  end
+
+  def update_profile
+
   end
 
   def setting

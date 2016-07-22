@@ -12,12 +12,12 @@
 			    <h3 class="panel-title">Shout your thoughts</h3>
 			</div>
 			<div class="panel-body">
-			<%= form_tag(:controller => 'shouts', :action => 'create') do %>
+			<%= form_for(Shout.new, :remote => true, :url => {:controller => 'shouts', :action => 'create'}) do |f| %>
 				<div class="form-group">
-					<%= text_area_tag(:message, nil, {class: "form-control", placeholder: "Enter message"}) %>
+					<%= f.text_area(:message, {class: "form-control", placeholder: "Enter message"}) %>
 				</div>
-				<%= hidden_field_tag(:redirect_to, request.original_url) %>
-				<%= submit_tag("Post shout", {class: "btn btn-primary"}) %>
+				<%= f.hidden_field(:redirect_to, :value => request.original_url) %>
+				<%= f.submit("Post shout", {class: "btn btn-primary"}) %>
 			<% end %>
 			</div>
 		</div>

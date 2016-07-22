@@ -2,22 +2,22 @@ class ShoutsController < ApplicationController
   before_filter :authenticate_user, :only => [:create]
 
   def create
-  	@shout = Shout.new(:message => params[:message], :user_id => @current_user.id)
+  	@shout = Shout.new(shout_params)
+    @shout.user_id = @current_user.id
 
-  	if @shout.save
-  	  flash[:notice] = "Shout successfully posted"
-  	  flash[:color] = "valid"
-  	else
-  	  flash[:notice] = "Form is invalid"
-  	  flash[:color] = "invalid"
-  	end
+    respond_to do |format|
+    	if @shout.save
+    	  format.json
+    	else
+    	  format.json { render json: @shout.errors, status: :unprocessable_entity }
+    	end
+    end
+  end
 
-  	if params[:redirect_to]
-  	  redirect_to(params[:redirect_to])
-  	  return
-  	end
+  private
 
-  	redirect_to(:controller => 'sessions', :action => 'home')
+  def shout_params
+    params.require(:shout).permit(:message, )
   end
 
 end
