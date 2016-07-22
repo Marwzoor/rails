@@ -1,0 +1,39 @@
+<% @page_title = "UserAuth | Signup" %>
+<div class="signup-form">
+	<h1>Sign Up</h1>
+	<% if @user.errors.any? %>
+		<div class="alert alert-danger" role="alert">
+		<% for message_error in @user.errors.full_messages %>
+			<p>
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+			  	<%= message_error %>
+		  	</p>
+		<% end %>
+		</div>
+	<% end %>
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+		<div class="form-group">
+			<%= f.label(:username, "Username") %>
+			<div class="input-group">
+				<span class="input-group-addon">@</span>
+				<%= f.text_field(:username, {class: "form-control", placeholder: "Username"}) %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label(:email, "Email") %>
+			<%= f.text_field(:email, {class: "form-control", placeholder: "Email"}) %>
+		</div>
+		<div class="form-group">
+			<%= f.label(:password, "Password") %>
+			<%= f.text_field(:password, {class: "form-control", placeholder: "Password"}) %>
+		</div>
+		<div class="form-group">
+			<%= f.label(:password_confirmation, "Password Confirmation") %>
+			<%= f.text_field(:password_confirmation, {class: "form-control", placeholder: "Password confirmation"}) %>
+		</div>
+		<div class="form-group">
+			<%= f.submit(:Signup, {class: "btn btn-primary"}) %>
+		</div>
+	<% end %>
+</div>

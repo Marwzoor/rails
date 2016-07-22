@@ -1,0 +1,15 @@
+<% @page_title = "UserAuth | Login" %>
+<div class="sign-in-form">
+	<h1>Log in</h1>
+	<%= form_tag(:action => 'login_attempt') do %>
+		<div class="form-group">
+			<%= label_tag(:username_or_email, "Username or email") %>
+			<%= text_field_tag(:username_or_email, nil, {class: "form-control", placeholder: "Username or email"}) %>
+		</div>
+		<div class="form-group">
+			<%= label_tag(:login_password, "Password") %>
+			<%= password_field_tag(:login_password, nil, {class: "form-control", placeholder: "Password"}) %>
+		</div>
+		<%= submit_tag("Log in", {class: "btn btn-primary"}) %>
+	<% end %>
+</div>
